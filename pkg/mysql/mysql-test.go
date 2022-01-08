@@ -54,5 +54,6 @@ func SelectOperation() {
 		log.Println("执行查询失败, 错误信息", err)
 		return
 	}
-	fmt.Println("执行查询成功", person)
+	log.Fatal("查询数据成功!")
+	fmt.Println("执行查询成功\n", person)
 }

@@ -1,0 +1,3 @@
+[mysql] 2022/01/08 19:03:21.987647 执行sql插入失败,错误信息 sql: database is closed
+[mysql] 2022/01/08 19:04:29.594094 执行sql插入失败,错误信息 sql: database is closed
+[mysql] 2022/01/08 19:21:12.570495 执行查询失败, 错误信息 missing destination name id in *[]mysql.Person

@@ -26,9 +26,17 @@ func init() {
 
 // InsertOperation 数据库连接初始化
 func InsertOperation() {
-	result, err := db.Exec("insert into person(name, sex, email) values (?,?,?)", "stu001", "man", "asdfasdf@163.com")
+	// 使用数据库原子性进行操作
+	conn, err := db.Begin()
+	if err != nil {
+		log.Println("执行失败, 错误信息", err)
+		return
+	}
+	result, err := conn.Exec("insert into person(name, sex, email) values (?,?,?)", "stu001", "man", "asdfasdf@163.com")
 	if err != nil {
 		log.Println("执行sql插入失败,错误信息", err)
+		// 如果提交失败，则进行rollback
+		conn.Rollback()
 		return
 	}
 	id, err := result.LastInsertId()
@@ -37,6 +45,8 @@ func InsertOperation() {
 		return
 	}
 	fmt.Println("向数据库表person中插入数据成功,数据插入ID号", id)
+	// 事务提交
+	conn.Commit()
 }
 
 // SelectOperation mysql查询操作
